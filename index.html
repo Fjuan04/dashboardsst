@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard SST - SENA</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        header {
+            background-color: #008f39;
+            padding: 20px;
+        }
+        header img {
+            max-width: 150px;
+        }
+        nav {
+            background: #00692d;
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+        .container {
+            padding: 20px;
+        }
+        .dashboard {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .chart-container {
+            width: 45%;
+            margin: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            background: #004b20;
+            color: white;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="images/sena.jpg" alt="Logo SENA">
+    </header>
+    <nav>
+        <a href="#inicio">Inicio</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#reportes">Reportes</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+    <div class="container">
+        <h1>Dashboard de Seguridad y Salud en el Trabajo</h1>
+        <div class="dashboard">
+            <div class="chart-container">
+                <h3>Accidentes por Mes</h3>
+                <canvas id="accidentesChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3>Inspecciones Programadas vs. Ejecutadas</h3>
+                <canvas id="inspeccionesChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3>Índice de Accidentalidad</h3>
+                <canvas id="indiceAccidentalidadChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3>Personal por Área</h3>
+                <canvas id="personalChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2025 SENA - Todos los derechos reservados</p>
+    </footer>
+    <script>
+        const accidentesData = {
+            labels: ["Ene", "Feb", "Mar", "Abr", "May"],
+            datasets: [{
+                label: "Accidentes",
+                data: [3, 0, 1, 0, 0],
+                backgroundColor: "rgba(255, 99, 132, 0.5)",
+                borderColor: "rgba(255, 99, 132, 1)",
+                borderWidth: 1
+            }]
+        };
+        
+        const inspeccionesData = {
+            labels: ["Ene", "Feb", "Mar", "Abr", "May"],
+            datasets: [
+                {
+                    label: "Programadas",
+                    data: [5, 7, 5, 5, 4],
+                    backgroundColor: "rgba(54, 162, 235, 0.5)",
+                    borderColor: "rgba(54, 162, 235, 1)",
+                    borderWidth: 1
+                },
+                {
+                    label: "Ejecutadas",
+                    data: [5, 7, 5, 5, 4],
+                    backgroundColor: "rgba(75, 192, 192, 0.5)",
+                    borderColor: "rgba(75, 192, 192, 1)",
+                    borderWidth: 1
+                }
+            ]
+        };
+        
+        const indiceAccidentalidadData = {
+            labels: ["Ene", "Feb", "Mar", "Abr", "May"],
+            datasets: [{
+                label: "Índice de Accidentalidad",
+                data: [0.02, 0.00, 0.01, 0.00, 0.00],
+                backgroundColor: "rgba(255, 159, 64, 0.5)",
+                borderColor: "rgba(255, 159, 64, 1)",
+                borderWidth: 1
+            }]
+        };
+        
+        const personalData = {
+            labels: ["Administración", "Producción", "Logística", "Mantenimiento"],
+            datasets: [{
+                label: "Personal",
+                data: [50, 150, 75, 30],
+                backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0"]
+            }]
+        };
+        
+        new Chart(document.getElementById("accidentesChart"), { type: "bar", data: accidentesData });
+        new Chart(document.getElementById("inspeccionesChart"), { type: "bar", data: inspeccionesData });
+        new Chart(document.getElementById("indiceAccidentalidadChart"), { type: "line", data: indiceAccidentalidadData });
+        new Chart(document.getElementById("personalChart"), { type: "pie", data: personalData });
+    </script>
+</body>
+</html>
